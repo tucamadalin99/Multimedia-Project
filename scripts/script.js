@@ -3,6 +3,7 @@ window.onload = () => {
     let playlist = document.querySelector('.video-list');
     let videoItems = playlist.querySelectorAll('.playlist-video-item');
     let pasNav = 50;
+    let tranzCount = 0;
     videoItems.forEach(vid => {
         vid.addEventListener('mouseover', (e) => {
             e.preventDefault();
@@ -30,15 +31,23 @@ window.onload = () => {
 
     document.getElementById('btn-next').addEventListener('click', (e) => {
         e.preventDefault();
+        if (tranzCount >= videoItems.length/2)
+            console.log("Max length")
+        else {
         pasNav -= 200;
-        playlist.style.marginLeft = pasNav + "px";
+            playlist.style.marginLeft = pasNav + "px";
+            tranzCount++;
+            console.log(tranzCount, videoItems.length);
+        }
+       
     })
 
     document.getElementById('btn-prev').addEventListener('click', (e) => {
         e.preventDefault();
-        if (pasNav > 0) {
+         if (tranzCount > 0) {
             pasNav += 200;
             playlist.style.marginLeft = pasNav + "px";
+            tranzCount--;
         }
 
     })

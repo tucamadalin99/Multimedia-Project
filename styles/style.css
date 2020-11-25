@@ -107,6 +107,7 @@ li:hover {
   height: 115px;
   margin-top: 14px;
   position: absolute;
+  z-index: 99;
 }
 
 #btn-next {
@@ -115,4 +116,5 @@ li:hover {
   margin-top: 14px;
   position: absolute;
   right: 0%;
+  z-index: 99;
 }
