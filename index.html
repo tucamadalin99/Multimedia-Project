@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles/style.css"/>
+        <title>Tuca's video player app</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="scripts/script.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+            
+        <div class="header">
+           <h1 id="header-title">Multimedia Video Player</h1>
+            <input type="file" accept="video/*" class="custom-file-input">
+        </div>
+        <div class="container-all">
+            
+        <div id="video_player">
+            <button id="btn-prev">Prev</button>
+            <ul class="video-list">
+                <li><video class="playlist-video-item" src="media/video1.mp4" width="200px"/></li>
+                <li><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video1.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
+                <li><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
+            </ul>
+            <button id="btn-next">Next</button>
+        </div>
+
+        <div id="video-container">
+            <video style="border: 1px solid black;" src="media/video3.mp4" id="current-video" width="800px" height="520px" controls="controls">
+            
+            </video>
+            
+        </div>
+    
+        </div>
+    </body>
+</html>
