@@ -71,17 +71,19 @@ h4 {
 #video-container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 #video_player {
   display: flex;
   justify-content: flex-start;
   width: 900px;
+  height: 130px;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
 }
 
-ul {
+.video-list {
   transition: all 0.7s;
   display: flex;
   float: left;
@@ -92,6 +94,8 @@ ul {
 
 li {
   width: inherit;
+  /* border: 1px solid black; */
+  /* height: 115px; */
 }
 
 li:hover {
@@ -117,4 +121,50 @@ li:hover {
   position: absolute;
   right: 0%;
   z-index: 99;
+}
+
+.playlist-options {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.btn-del-item {
+  position: absolute;
+  z-index: 100;
+  display: none;
+}
+
+li:hover > .btn-del-item {
+  display: block;
+}
+
+.empty-playlist {
+  margin: 0 auto;
+  margin-top: 3%;
+}
+
+.effect-list {
+  list-style: square;
+}
+.effect-item {
+  padding: 5px;
+}
+
+.btn-add.effect {
+  text-align: center;
+  width: 115px;
+  height: 46px;
+}
+
+.effect-container {
+  display: flex;
+  justify-content: center;
+  width: 10%;
+  background-image: linear-gradient(to right bottom, #2d6cb5, #1a154c);
+}
+
+.btn-action {
+  text-align: center;
+  width: 115px;
+  height: 46px;
 }

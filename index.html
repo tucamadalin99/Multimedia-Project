@@ -23,26 +23,39 @@
         <div id="video_player">
             <button id="btn-prev">Prev</button>
             <ul class="video-list">
-                <li><video class="playlist-video-item" src="media/video1.mp4" width="200px"/></li>
-                <li><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video1.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
-                <li><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
+                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video1.mp4" width="200px"/></li>
+                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
+                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
+                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
             </ul>
             <button id="btn-next">Next</button>
         </div>
 
         <div id="video-container">
+                <div class="effect-container">
+                    <ul class="effect-list">
+                        <li class="option-item"><button id="btn-add-playlist" class="btn-action">Add to playlist</button></li>
+                    </ul>
+                </div>
             <video style="border: 1px solid black;" src="media/video3.mp4" id="current-video" width="800px" height="520px" controls="controls">
             
             </video>
-            
+            <canvas id="canvas1" width="800px" height="520px"></canvas>
+            <div class="effect-container">
+                        <ul class="effect-list">
+                            <li class="effect-item"><button id="btn-add-bw" class="btn-effect">Add black & white filter</button></li>
+                            <li class="effect-item"><button id="btn-add-bw" class="btn-effect">Add black & white filter</button></li>
+                            <li class="effect-item"><button id="btn-add-bw" class="btn-effect">Add black & white filter</button></li>
+                            <li class="effect-item"><button id="btn-add-bw" class="btn-effect">Add black & white filter</button></li>
+                        </ul>
+            </div>
+            <!-- <button id="btn-add-bw" class="btn-add-bw">Add black & white filter</button> -->
         </div>
-    
+
+        <div>
+            <!-- <canvas id="canvas1" width="800px" height="520px"></canvas> -->
+        </div>
+        
         </div>
     </body>
 </html>
