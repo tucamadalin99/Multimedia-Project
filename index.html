@@ -10,6 +10,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="scripts/script.js"></script>
         <!-- Latest compiled JavaScript -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -21,23 +22,23 @@
         <div class="container-all">
             
         <div id="video_player">
-            <button id="btn-prev">Prev</button>
+            <button id="btn-prev"><i class="material-icons">navigate_before</i></button>
             <ul class="video-list">
-                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video1.mp4" width="200px"/></li>
-                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
-                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
-                <li><button class="btn-del-item">delete</button><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
+                <li><button class="btn-del-item"><i class="material-icons">delete_forever</i></button><video class="playlist-video-item" src="media/video1.mp4" width="200px"/></li>
+                <li><button class="btn-del-item"><i class="material-icons">delete_forever</i></button><video class="playlist-video-item" src="media/video2.mp4" width="200px" /></li>
+                <li><button class="btn-del-item"><i class="material-icons">delete_forever</i></button><video class="playlist-video-item" src="media/video3.mp4" width="200px" /></li>
+                <li><button class="btn-del-item"><i class="material-icons">delete_forever</i></button><video class="playlist-video-item" src="media/video4.mp4" width="200px" /></li>
             </ul>
-            <button id="btn-next">Next</button>
+            <button id="btn-next"><i class="material-icons">navigate_next</i></button>
         </div>
 
         <div id="video-container">
                 <div class="effect-container">
-                    <ul class="effect-list">
-                        <li class="option-item"><button id="btn-add-playlist" class="btn-action">Add to playlist</button></li>
+                    <ul class="option-list">
+                        <li class="option-item"><button id="btn-add-playlist" class="btn-action"><i class="material-icons">playlist_add</i></button></li>
                     </ul>
                 </div>
-            <video style="border: 1px solid black;" src="media/video3.mp4" id="current-video" width="800px" height="520px" controls="controls">
+            <video style="border: 1px solid black;" src="media/video4.mp4" id="current-video" width="800px" height="520px">
             
             </video>
             <canvas id="canvas1" width="800px" height="520px"></canvas>
