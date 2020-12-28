@@ -48,12 +48,6 @@
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
-.container-all {
-  /* width: 50%;
-  margin: 0 auto; */
-  box-shadow: inset 0 0 20px #000000;
-}
-
 #header-title {
   color: #ffffff;
   margin: 0 auto;
@@ -199,4 +193,15 @@ li:hover > .btn-del-item {
   height: 60px;
   width: 100px;
   border-radius: 8%;
+}
+
+#review-video {
+  position: absolute;
+  top: 625px;
+  border: 1px solid black;
+  display: none;
+}
+
+#canvas1 {
+  position: relative;
 }

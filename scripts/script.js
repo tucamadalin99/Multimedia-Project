@@ -14,26 +14,27 @@ window.onload = () => {
 
     //adauga efectele de play la hover pe fiecare video din playlist
     var addListeners = function () {
-            videoItems.forEach(vid => {
-        vid.addEventListener('mouseover', (e) => {
-            e.preventDefault();
-            vid.muted = true;
-            vid.play();
-        })
+        videoItems.forEach(vid => {
+            vid.addEventListener('mouseover', (e) => {
+                e.preventDefault();
+                vid.muted = true;
+                vid.play();
+            })
 
-        vid.addEventListener('mouseleave', (e) => {
-            e.preventDefault();
-            vid.pause();
-            vid.currentTime = 0;
-        })
+            vid.addEventListener('mouseleave', (e) => {
+                e.preventDefault();
+                vid.pause();
+                vid.currentTime = 0;
+            })
 
-                //Incarca video-ul in ecranul principal la click
-        vid.addEventListener("click", (e) => {
-            e.preventDefault();
-            videoArea.src = vid.src;
-            videoArea.play();
+            //Incarca video-ul in ecranul principal la click
+            vid.addEventListener("click", (e) => {
+                e.preventDefault();
+                videoArea.src = vid.src;
+                reviewVideo.src = vid.src;
+                videoArea.play();
+            })
         })
-    })
     }
 
     let addDeleteBtn = function () {
@@ -55,11 +56,11 @@ window.onload = () => {
     //Gaseste pozitia videoului din ecranul principal si returneaza path-ul urmatorului video
     let returnNextVid = function (videoItems, videoArea) {
         let nextVid;
-        videoItems.forEach((vid,index) => {
+        videoItems.forEach((vid, index) => {
             if (vid.src === videoArea.src) {
                 if (videoItems[index + 1]) {
                     nextVid = videoItems[index + 1].src;
-                }     
+                }
             }
         })
         return nextVid;
@@ -89,7 +90,6 @@ window.onload = () => {
     }
 
     addListeners();
-    //addDeleteBtn();
     //Functia verifica la un scurt interval daca s-a ajuns la final de videoclip si trece la urm. videoclip
     //Intoarce calea oricarui videoclip de pe disc
     $('input[type=file]').change(function () {
@@ -103,9 +103,8 @@ window.onload = () => {
         if (tranzCount == videoItems.length)
             console.log("Max length")
         else {
-        pasNav -= 200;
+            pasNav -= 200;
             playlist.style.marginLeft = pasNav + "px";
-            //itemsLength++;
             tranzCount++;
         }
         console.log(videoItems.length, tranzCount);
@@ -117,11 +116,11 @@ window.onload = () => {
     document.getElementById('btn-prev').addEventListener('click', (e) => {
         e.preventDefault();
         console.log(pasNav)
-         if (pasNav < 50) {
+        if (pasNav < 50) {
             pasNav += 200;
-             playlist.style.marginLeft = pasNav + "px";
+            playlist.style.marginLeft = pasNav + "px";
             //  itemsLength--;
-             tranzCount--;
+            tranzCount--;
         }
 
     })
@@ -130,7 +129,6 @@ window.onload = () => {
     document.getElementById('btn-add-playlist').addEventListener('click', (e) => {
         playlist.insertAdjacentHTML('beforeend', `<li><video class="playlist-video-item" src="${videoArea.src}" width="200px" height="112.5px" /></li>`)
         videoItems = playlist.querySelectorAll('.playlist-video-item');
-        //console.log(videoItems.length, tranzCount);
         videoItems[videoItems.length - 1].addEventListener('click', (e) => {
             e.preventDefault();
             videoArea.src = e.target.src;
@@ -163,7 +161,7 @@ window.onload = () => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             btn.parentNode.remove();
-           tranzCount--;
+            tranzCount--;
             playlist.style.marginLeft -= btn.parentNode.width;
             videoItems.pop();
             console.log(videoItems);
@@ -176,10 +174,84 @@ window.onload = () => {
        
     })
 
+    //Boolean butoane efecte
+    let selectatNimic = false;
+    let selectatBw = false;
+    let selectatNegative = false;
+    let selectatNeon = false;
+    let selectatWarm = false;
+    let selectatCold = false;
+    document.getElementById('btn-add-bw').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatBw = true;
+        //deselect restul butoanelor
+        selectatNegative = false;
+        selectatNimic = false;
+        selectatNeon = false;
+        selectatCold = false;
+        selectatWarm = false;
+    })
 
-//TODO:NAV BUTTON TO FIX VALIDATIONS
+    document.getElementById('btn-add-inv').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatNegative = true;
+        //deselect
+        selectatBw = false;
+        selectatNimic = false;
+        selectatNeon = false;
+        selectatWarm = false;
+        selectatCold = false;
+    })
+
+    document.getElementById('btn-normal').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatNimic = true;
+        //deselectare
+        selectatBw = false;
+        selectatNegative = false;
+        selectatNeon = false;
+        selectatWarm = false;
+        selectatCold = false;
+    })
+
+    document.getElementById('btn-add-neon').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatNeon = true;
+        //deselectare
+        selectatNimic = false;
+        selectatBw = false;
+        selectatNegative = false;
+        selectatWarm = false;
+        selectatCold = false;
+    })
+
+    document.getElementById('btn-add-warm').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatWarm = true;
+        //deselect restul
+        selectatNimic = false;
+        selectatBw = false;
+        selectatNegative = false;
+        selectatNeon = false;
+        selectatCold = false;
+
+    })
+
+    document.getElementById('btn-add-cold').addEventListener('click', (e) => {
+        e.preventDefault();
+        selectatCold = true;
+        //deselect restul
+        selectatNimic = false;
+        selectatBw = false;
+        selectatNegative = false;
+        selectatNeon = false;
+        selectatWarm = false;
+    })
+
+
     let canvas = document.getElementById('canvas1');
     let context = canvas.getContext("2d");
+    let hVolum = 384;
 
     function drawFrame() {
         let W = canvas.width = videoArea.clientWidth;
@@ -191,18 +263,44 @@ window.onload = () => {
         let pixels = imgData.data;
         
         //efectele se fac aici
+        
         for (let y = 0; y < H; y++)
-            for (let x = 0; x < W; x++){
+            for (let x = 0; x < W; x++) {
                 let i = (y * W + x) * 4;
                 let avg = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
-                // pixels[i] = avg;
-                // pixels[i + 1] = avg;
-                // pixels[i + 2] = avg;
+                if (selectatBw) {
+                    pixels[i] = avg;
+                    pixels[i + 1] = avg;
+                    pixels[i + 2] = avg;
+                }
+                if (selectatNegative) {
+                    pixels[i] = pixels[i] ^ 255; //inverseaza rosu
+                    pixels[i + 1] = pixels[i + 1] ^ 255; // inverseaza verde
+                    pixels[i + 2] = pixels[i + 2] ^ 255; //inverseaza albastru
+                }
+                if (selectatNimic) {
+                    pixels[i] = pixels[i]
+                    pixels[i + 1] = pixels[i + 1]
+                    pixels[i + 2] = pixels[i + 2]
+                }
+                if (selectatNeon) {
+                    pixels[i + 1] = avg / 2; //violet
+                    pixels[i + 2] = pixels[i + 2] + 30; //accentueaza albastru
+                }
+                if (selectatWarm) {
+                    pixels[i] += 10;
+                    pixels[i + 1] += 10;
+                }
+                if (selectatCold) {
+                    pixels[i + 2] += 20;
+                }
             }
+    
+
         
         context.globalAlpha = 0.5; //semi-transparent
         context.putImageData(imgData, 0, 0);
-         context.font = "bold 16px sans-serif";
+        context.font = "bold 16px sans-serif";
         context.fillStyle = "red";
         context.fillText(videoArea.currentTime.toFixed(0) + "s", 10, H - 30);
         context.strokeText(videoArea.currentTime.toFixed(0) + "s", 10, H - 30);
@@ -210,8 +308,8 @@ window.onload = () => {
         //Desenare buton play
         context.beginPath();
         context.moveTo(10, H - 45);
-        context.lineTo(10, H - H/7.5);
-        context.lineTo(W/22, H - H/9);
+        context.lineTo(10, H - H / 7.5);
+        context.lineTo(W / 22, H - H / 9);
         context.fillStyle = 'red';
         context.stroke();
         context.fill();
@@ -227,7 +325,7 @@ window.onload = () => {
         context.lineTo(xLinie1, H - 45);
         context.fillStyle = 'red';
         context.stroke();
-         context.fill();
+        context.fill();
         context.beginPath();
         xLinie1 = 58;
         x2Linie1 = 65;
@@ -243,6 +341,7 @@ window.onload = () => {
         //Desenare progress bar
         context.beginPath();
         context.fillStyle = 'red';
+        //Desenare progresiva pe parcursul duratei videoului
         desenProgresBar(videoArea.duration, W - 25);
         context.rect(10, H - 25, W - 25, 10);
         context.fill();
@@ -262,20 +361,26 @@ window.onload = () => {
         context.lineTo(15, 27);
         context.lineTo(30, 18);
         context.fill();
-
-
-
+        //Desenare volum
+        context.beginPath();
+        context.fillStyle = 'red';
+        context.globalAlpha = 0.3;
+        context.rect(W - 27, H - 135, 10, 100);
+        context.fill();
+        //desen vol
+        desenVolum(hVolum);
+        
 
     }
 
     window.setInterval(drawFrame, 30);
 
 
-      let W = canvas.width = videoArea.clientWidth;
+    let W = canvas.width = videoArea.clientWidth;
     let H = canvas.height = videoArea.clientHeight;
     
     function desenProgresBar(durata, latimeBara) {
-         let xProgressBar = 10;
+        let xProgressBar = 10;
         let yProgressBar = H - 25;
         //impartim latimea barii la durata videoului si obtinem coeficientul de pixeli
         // impartim coeficientul obtinut la timpul curent din video si desenam un dreptunghi continuu pana la finalul barii
@@ -288,12 +393,19 @@ window.onload = () => {
         context.stroke();
         context.fill();
     }
+    function desenVolum(y) {
+        context.beginPath();
+        context.rect(W - 27, y, 10, 10);
+        context.globalAlpha = 1;
+        context.stroke();
+        context.fill();
+    }
 
     function functiiVideo(canvas, e) {
         let rect = canvas.getBoundingClientRect();
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
-        console.log(x,y)
+        console.log(x, y)
 
         let xPlayStart = 10;
         let xPlayEnd = xPlayStart + 25;
@@ -318,6 +430,7 @@ window.onload = () => {
             let coeficientPx = (xBarEnd / videoArea.duration);
             let durataCurenta = x / coeficientPx;
             videoArea.currentTime = durataCurenta;
+            console.log(durataCurenta);
         }
 
         let xNextStart = W - 30;
@@ -327,8 +440,8 @@ window.onload = () => {
 
         if ((x >= xNextStart && x <= xNextEnd) && (y >= yNextStart && y <= yNextEnd)) {
             let nextVideo = returnNextVid(videoItems, videoArea);
-            if(nextVideo != null)
-            videoArea.src = nextVideo;
+            if (nextVideo != null)
+                videoArea.src = nextVideo;
         }
 
         let xPrevStart = 15;
@@ -342,10 +455,58 @@ window.onload = () => {
                 videoArea.src = prevVideo;
         }
 
+        let xVolStart = W - 27;
+        let xVolEnd = W - 16;
+        let yVolStart = H - 135;
+        let yVolEnd = H - 38;
+    
+        if ((x >= xVolStart && x <= xVolEnd) && (y >= yVolStart && y <= yVolEnd)) {
+            //TODO
+            hVolum = y;
+            if (y <= yVolEnd + 5 && y >= yVolEnd)
+                videoArea.volume = 0;
+            else {
+                let coefVolum = (y - (H - 135));
+                let volum = 100;
+                let volumCurent = (volum - coefVolum) / 100;
+                videoArea.volume = volumCurent;
+            }
+            
+        }
+
+
+
     }
 
     canvas.addEventListener('click', (e) => {
         functiiVideo(canvas, e);
+        
+    })
+    let reviewVideo = document.getElementById('review-video');
+    let rect = canvas.getBoundingClientRect();
+      let xBarStart = 10;
+        let xBarEnd = 775;
+        let yBarStart = H - 15;
+        let yBarEnd = yBarStart - 10;
+    canvas.addEventListener('mousemove', (e) => {
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+        if ((x >= xBarStart && x <= xBarEnd) && (y >= yBarEnd && y <= yBarStart)) {
+            reviewVideo.style.left = x + rect.left + "px";
+            reviewVideo.style.display = "block";
+            let coeficientPx = (xBarEnd / videoArea.duration);
+            let durataCurenta = x / coeficientPx;
+            reviewVideo.currentTime = durataCurenta;
+            reviewVideo.pause();
+            console.log(durataCurenta);
+        }
+    })
+    canvas.addEventListener('mouseleave', (e) => {
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+        if (!((x >= xBarStart && x <= xBarEnd) && (y >= yBarEnd && y <= yBarStart))) {
+            reviewVideo.style.display = 'none';
+        } 
     })
 }
 
