@@ -9,6 +9,7 @@ window.onload = () => {
     let tranzCount = videoItems.length;
     let itemsLength = videoItems.length;
 
+    //pozitioneaza canvas-ul peste elementul video pentru a nu fi doua
     videoArea.style.position = 'absolute'
     videoArea.style.zIndex = -1;
 
@@ -45,7 +46,6 @@ window.onload = () => {
             currentDeleteBtn.parentNode.remove();
             tranzCount--;
             itemsLength -= 1;
-            //console.log(itemsLength);
             if (itemsLength === 0) {
                 videoItems.length = 0;
                 playlistArea.insertAdjacentHTML('beforeend', '<h3 class="empty-playlist">Empty playlist</h3>')
@@ -84,6 +84,7 @@ window.onload = () => {
         if (returnNextVid(videoItems, videoArea) != null) {
             if (videoArea.duration === videoArea.currentTime) {
                 videoArea.src = returnNextVid(videoItems, videoArea);
+                reviewVideo.src = videoArea.src;
                 videoArea.play();
             }
         }
@@ -92,8 +93,11 @@ window.onload = () => {
     addListeners();
     //Functia verifica la un scurt interval daca s-a ajuns la final de videoclip si trece la urm. videoclip
     //Intoarce calea oricarui videoclip de pe disc
-    $('input[type=file]').change(function () {
-        let path = window.URL.createObjectURL(this.files[0]);
+    let videoPath = document.querySelector('input[type=file]');
+    videoPath.addEventListener('change', (e) => {
+        e.preventDefault();
+        let path = window.URL.createObjectURL(e.target.files[0]);
+        reviewVideo.src = path;
         videoArea.src = path;
     })
 
@@ -132,6 +136,7 @@ window.onload = () => {
         videoItems[videoItems.length - 1].addEventListener('click', (e) => {
             e.preventDefault();
             videoArea.src = e.target.src;
+            reviewVideo.src = e.target.src;
             videoArea.play();
         })
         videoItems[videoItems.length - 1].addEventListener('mouseover', (e) => {
@@ -482,12 +487,17 @@ window.onload = () => {
         functiiVideo(canvas, e);
         
     })
+
+    //Implementare review cadru
     let reviewVideo = document.getElementById('review-video');
     let rect = canvas.getBoundingClientRect();
       let xBarStart = 10;
         let xBarEnd = 775;
         let yBarStart = H - 15;
-        let yBarEnd = yBarStart - 10;
+    let yBarEnd = yBarStart - 10;
+    //Am luat coordonatele progress bar-ului
+
+    //La intrarea mouse-ului pe canvas, daca mouse-ul se afla in limtele progress bar-ului, se afiseaza cadrul la momentu respectiv
     canvas.addEventListener('mousemove', (e) => {
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
@@ -501,6 +511,7 @@ window.onload = () => {
             console.log(durataCurenta);
         }
     })
+    //La iesirea cursorului din limtele progress bar-ului, cadrul de preview dispare
     canvas.addEventListener('mouseleave', (e) => {
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
